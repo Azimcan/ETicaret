@@ -1,27 +1,17 @@
 package com.eticaret;
 
 public class Kullanici {
-	protected int kullanici_id;
 	protected String adi_soyadi;
 	protected String telefon;
 	protected String email;
 	protected String adres;
 	protected String sifre;
-
-	public Kullanici(int kullanici_id, String adi_soyadi, String telefon, String email, String adres, String sifre) {
-		this.kullanici_id= kullanici_id; 
-		this.adi_soyadi = adi_soyadi; 
-		this.telefon = telefon;
-		this.email = email; 
-		this.adres = adres;
-		this.sifre = sifre;
-	}
 	
 	public Kullanici(String email, String sifre) {
 		this.email = email; 
 		this.sifre = sifre;
 	}
-
+	
 	public Kullanici(String adi_soyadi, String telefon, String email, String adres, String sifre) {
 		this.adi_soyadi = adi_soyadi; 
 		this.telefon = telefon;
@@ -35,14 +25,6 @@ public class Kullanici {
 		this.telefon = telefon;
 		this.email = email; 
 		this.adres = adres;
-	}
-
-
-	public int getKullanici_id() {
-		return kullanici_id;
-	}
-	public void setKullanici_id(int kullanici_id) {
-		this.kullanici_id = kullanici_id;
 	}
 
 	public String getAdi_soyadi() {

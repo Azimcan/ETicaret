@@ -15,9 +15,15 @@
 	
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark bg-danger">
-			<a class="nav-link ml-2" href="index.jsp"><img src="images/picture.png" width="200" height="50px"></a>
-			<%
-	        String e_posta=(String)session.getAttribute("eposta");
+			<a class="nav-link ml-2" href="list"><img src="images/picture.png" width="200px" height="50px"></a>
+			<%@ page import="java.text.SimpleDateFormat" %>
+			<%@ page import="java.util.Date" %>
+			<% 
+			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+		    Date now = new Date();
+		    String strDate = sdfDate.format(now);
+			
+		    String e_posta=(String)session.getAttribute("eposta");
 		 	if(e_posta==null) {%>
 				<ul class="navbar-nav mr-auto ml-5">
 					<li class="nav-item active">
@@ -30,22 +36,22 @@
 				<% } else { %>
 				<ul class="navbar-nav ml-auto mr-5">
 					<li class="nav-item active">
-						<p class="nav-link">Hoşgeldiniz,<%=e_posta%></p>
+						<p class="nav-link">Hoşgeldiniz, <b><%=e_posta%></b></p>
 					</li>
 					<li class="nav-item active">
 						<form action="kullaniciBilgileriForm" method="post">
 							<input type="hidden" name="eposta" value="<%=e_posta%>">
-							<input class="nav-link" type="submit" value="Bilgilerim">
+							<input class="nav-link btn bg-danger text-white" type="submit" value="Bilgilerim">
 						</form>
 					</li>
 					<li class="nav-item active">
 						<form action="kullaniciSiparisleriForm" method="post">
 							<input type="hidden" name="eposta" value="<%=e_posta%>">
-							<input class="nav-link" type="submit" value="Siparislerim">
+							<input class="nav-link btn bg-danger text-white" type="submit" value="Siparislerim">
 						</form>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="sepet">Sepet</a>
+						<a class="nav-link" href="sepet">Sepetim</a>
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="KullaniciCikis.jsp">Çıkış</a>
@@ -55,14 +61,50 @@
 		</nav>
 	</header>
 
-	<div class="container bg-info my-1">
-		<div class="row bg-info m-auto">
-			<p>Ürünler</p>
-			<c:forEach var="urun" items="${urunler}">
-				<div class="col-lg-4">
-						<p><c:out value="${urun}"/></p>
-				</div>
-			</c:forEach>
+	<div class="container">
+		<div class="row bg-light p-3 m-auto">
+		<% if (session.getAttribute("cart") != null) { %>
+			<h2>Sepetim</h2>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead class="thead-danger">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Ürün</th>
+							<th scope="col">Adet</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="cartItem" items="${requestScope.cartAd}" varStatus="loop">	
+							<tr>
+								<th scope="col">${loop.index+1}</th>
+								<th scope="col"><p><c:out value="${cartItem.key}" /></p></th>
+								<th scope="col"><p><c:out value="${cartItem.value}" /></p></th>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div class="row text-right ml-5">
+				<a class="btn btn-outline-danger " href="sepetiTemizle">SepetiTemizle</a>
+			</div>
+			<div class="ml-auto mr-5">
+			
+				<form action="siparisiTamamla" method="post">
+					Ödeme Türü:
+					<select name="odeme_sekli" class="btn btn-outline-danger ">
+		  				<option value="krediKarti">Kredi Kartı</option>
+		  				<option value="KapidaOdeme">Kapıda Ödeme</option>
+					</select>
+					<input type="hidden" name="eposta" value="<%=e_posta%>">
+					<input type="hidden" name="tarih" value="<%=strDate%>">
+					<input type="submit" class="btn btn-outline-danger " value="Siparişi Tamamla">
+				</form>
+			</div>
+			<%} else {%>
+			Sepetiniz Boş...
+			<%} %>
 		</div>
 	</div>
 

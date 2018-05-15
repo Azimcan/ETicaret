@@ -14,8 +14,8 @@
 <body class="bg-dark">
 	
 	<header>
-		<nav class="navbar navbar-expand-md navbar-dark bg-danger">
-			<a class="nav-link ml-2" href="index.jsp"><img src="images/picture.png" width="200" height="50px"></a>
+		<nav class="navbar navbar-expand-md navbar-dark text-dark bg-danger">
+			<a class="nav-link ml-2" href="main"><img src="images/picture.png" width="200px" height="50px"></a>
 			<%
 	        String e_posta=(String)session.getAttribute("eposta");
 		 	if(e_posta==null) {%>
@@ -30,19 +30,22 @@
 				<% } else { %>
 				<ul class="navbar-nav ml-auto mr-5">
 					<li class="nav-item active">
-						<p class="nav-link">Hoşgeldiniz,<%=e_posta%></p>
+						<p class="nav-link">Hoşgeldiniz, <b><%=e_posta%></b></p>
 					</li>
 					<li class="nav-item active">
 						<form action="kullaniciBilgileriForm" method="post">
 							<input type="hidden" name="eposta" value="<%=e_posta%>">
-							<input class="nav-link" type="submit" value="Bilgilerim">
+							<input class="nav-link btn bg-danger text-white" type="submit" value="Bilgilerim">
 						</form>
 					</li>
 					<li class="nav-item active">
 						<form action="kullaniciSiparisleriForm" method="post">
 							<input type="hidden" name="eposta" value="<%=e_posta%>">
-							<input class="nav-link" type="submit" value="Siparislerim">
+							<input class="nav-link btn bg-danger text-white" type="submit" value="Siparislerim">
 						</form>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="sepet">Sepetim</a>
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="KullaniciCikis.jsp">Çıkış</a>
@@ -51,7 +54,6 @@
 			<% } %>
 		</nav>
 	</header>
-
 
 
 	<div class="container">
@@ -71,7 +73,7 @@
 			<c:forEach var="siparisDetay" items="${siparisDetaylari}" varStatus="loop">	
 						<tr>
 								<th class="align-middle">${loop.index+1}</th>
-								<th><p><c:out value="${siparisDetay.urun_id}" /></p></th>
+								<th><p><c:out value="${siparisDetay.adi}" /></p></th>
 								<th><p><c:out value="${siparisDetay.fiyat}" /></p></th>
 								<th><p><c:out value="${siparisDetay.adet}" /></p></th>
 				</tr>

@@ -12,6 +12,12 @@ public class Siparis {
 		this.tarih = tarih; 
 		this.odeme_sekli = odeme_sekli;
 	}
+	
+	public Siparis(String eposta, String tarih, String odeme_sekli) {
+		this.eposta = eposta;
+		this.tarih = tarih; 
+		this.odeme_sekli = odeme_sekli;
+	}
 
 	public int getSiparis_id() {
 		return siparis_id;

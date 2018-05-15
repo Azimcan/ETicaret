@@ -4,17 +4,17 @@ public class Urun {
 	protected int urun_id;
 	protected String adi;
 	protected int stok;
-	protected float fiyat;
+	protected int fiyat;
 	protected int kategori_id;
 	
-	public Urun(int urun_id, String adi, int stok, float fiyat, int kategori_id) {
+	public Urun(int urun_id, String adi, int stok, int fiyat, int kategori_id) {
 		this.urun_id= urun_id; 
 		this.adi = adi; 
 		this.stok = stok;
 		this.fiyat = fiyat; 
 		this.kategori_id = kategori_id;
 	}
-	public Urun(String adi, int stok, float fiyat, int kategori_id) {
+	public Urun(String adi, int stok, int fiyat, int kategori_id) {
 		this.adi = adi; 
 		this.stok = stok;
 		this.fiyat = fiyat; 
@@ -42,10 +42,10 @@ public class Urun {
 		this.stok = stok;
 	}
 
-	public float getFiyat() {
+	public int getFiyat() {
 		return fiyat;
 	}
-	public void setFiyat(float fiyat) {
+	public void setFiyat(int fiyat) {
 		this.fiyat = fiyat;
 	}
 

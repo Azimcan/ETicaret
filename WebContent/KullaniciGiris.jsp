@@ -12,18 +12,12 @@
 	
 </head>
 <body class="bg-dark">
-	 <%
-        String e_posta=(String)session.getAttribute("eposta");
-        
-        if(e_posta!=null){
-            response.sendRedirect("list");
-        }
-        %>
+	
 	<header>
-		<nav class="navbar navbar-expand-md navbar-dark bg-danger">
-			<a class="nav-link ml-2" href="index.jsp"><img src="images/picture.png" width="200" height="50px"></a>
+		<nav class="navbar navbar-expand-md navbar-dark text-dark bg-danger">
+			<a class="nav-link ml-2" href="main"><img src="images/picture.png" width="200px" height="50px"></a>
 			<%
-	        e_posta=(String)session.getAttribute("eposta");
+	        String e_posta=(String)session.getAttribute("eposta");
 		 	if(e_posta==null) {%>
 				<ul class="navbar-nav mr-auto ml-5">
 					<li class="nav-item active">
@@ -36,13 +30,25 @@
 				<% } else { %>
 				<ul class="navbar-nav ml-auto mr-5">
 					<li class="nav-item active">
-						<a class="nav-link" href="kullaniciBilgileriForm">Bilgilerim</a>
+						<p class="nav-link">Hoşgeldiniz, <b><%=e_posta%></b></p>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="kullaniciSiparisleriForm">Siparişlerim</a>
+						<form action="kullaniciBilgileriForm" method="post">
+							<input type="hidden" name="eposta" value="<%=e_posta%>">
+							<input class="nav-link btn bg-danger text-white" type="submit" value="Bilgilerim">
+						</form>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Çıkış</a>
+						<form action="kullaniciSiparisleriForm" method="post">
+							<input type="hidden" name="eposta" value="<%=e_posta%>">
+							<input class="nav-link btn bg-danger text-white" type="submit" value="Siparislerim">
+						</form>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="sepet">Sepetim</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="KullaniciCikis.jsp">Çıkış</a>
 					</li>
 				</ul>
 			<% } %>
@@ -60,12 +66,12 @@
 
 					<div class="mb-3">
 						<label for="e-posta">E-posta</label>
-						<input type="email" class="form-control" id="e-posta" name="eposta" size="128" placeholder="name@example.com" value="a@a.com">
+						<input type="email" class="form-control" id="e-posta" name="eposta" size="128" placeholder="name@example.com">
 					</div>
 
 					<div class="mb-3">
 						<label for="password">Şifre</label>
-						<input type="password" class="form-control" id="password" name="sifre" size="32" value="12345">
+						<input type="password" class="form-control" id="password" name="sifre" size="32">
 					</div>
 
 					<hr class="mb-4">
